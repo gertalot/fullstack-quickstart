@@ -3,6 +3,8 @@ from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from .db import Base, get_engine
+from . import models  # Ensure all models are imported
 
 load_dotenv()
 
@@ -42,4 +44,9 @@ app.add_middleware(
 )
 
 app.include_router(router, prefix="/api/v1")
+
+@app.on_event("startup")
+def ensure_schema():
+    engine = get_engine()
+    Base.metadata.create_all(engine)
 
