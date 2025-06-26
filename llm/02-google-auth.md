@@ -89,4 +89,26 @@ Examples:
 
 ### 1.3. user admin
 
-In the admin CLI tool, implement the "user" functionality as illustrated above in the help text.
+[x] In the admin CLI tool, implement the "user" functionality as illustrated above in the help text.
+
+---
+
+### 2. Google OAuth backend
+
+Implement OAuth2 with Google on the backend API. Create a distinction between public routes and
+authenticated routes. The authenticated routes can only be accessed with a successful bearer token (a JWT).
+
+Create a route `/auth/login/google` that initiates the OAuth2 flow with Google. I have configured the following
+variables in .env that you can use:
+
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+- SESSION_SECRET_KEY
+- JWT_SECRET
+
+Create a route `/auth/callback/google` to handle the Oauth2 callback from Google. Detect the original frontend
+server the user was using (e.g. <http://localhost>, <https://example.com>, etc) and return a redirect response
+to the frontend path `/auth/callback#token={jwt_token}`. We will handle the JWT in the frontend at a later stage.
+
+Create an authenticated route `/auth` that, when authenticated, returns an object representing the user. We will
+use this in the frontend to detect if a user is logged in.
