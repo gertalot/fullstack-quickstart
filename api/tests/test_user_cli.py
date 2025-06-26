@@ -4,8 +4,8 @@ import tempfile
 import subprocess
 import uuid
 import pytest
-from api.db import Base, get_engine
-from api.models import User
+from app.db import Base, get_engine
+from app.models import User
 
 def run_cli(args, db_url):
     env = os.environ.copy()

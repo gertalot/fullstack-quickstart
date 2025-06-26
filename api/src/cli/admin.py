@@ -1,7 +1,7 @@
 import sys
 import argparse
-from api.db import get_engine, get_session
-from api.models import User
+from app.db import get_engine, get_session
+from app.models import User
 
 def main():
     parser = argparse.ArgumentParser(

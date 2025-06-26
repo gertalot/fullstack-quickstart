@@ -1,8 +1,8 @@
 import uuid
 import datetime
 import pytest
-from api.db import Base, get_engine, get_session
-from api.models import User
+from app.db import Base, get_engine, get_session
+from app.models import User
 
 @pytest.fixture
 def in_memory_db():

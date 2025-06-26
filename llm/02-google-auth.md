@@ -87,7 +87,7 @@ Examples:
   python -m cli.admin user del me@gertalot.com
 ```
 
-### 1.3. user admin
+### 1.3. user admin (Done)
 
 [x] In the admin CLI tool, implement the "user" functionality as illustrated above in the help text.
 
