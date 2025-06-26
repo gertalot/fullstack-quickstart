@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Coding Style Guidelines
+
+- Line length: 120 characters
+- Indent: 4 spaces
+- Refactor ruthlessly to keep code small, elegant, and readable
+- Split code into multiple files or modules of related functionality; use best practice and your expertise for judgement
+- Use clear, descriptive, and consistent naming conventions (snake_case for Python, camelCase for JS/TS, PascalCase for classes)
+- Always use type annotations (TypeScript types, Python type hints) where possible
+- Write concise docstrings (Python) or JSDoc/TSDoc comments (TypeScript) for all public functions, classes, and modules
+- Handle errors gracefully and explicitly; avoid bare excepts/catches
+- Prefer immutable data structures and avoid mutating function arguments
+- All new code must be covered by automated tests
+- Minimize external dependencies; use standard libraries when possible
+- Use automated formatters (Black, Prettier, etc.) to enforce style
+- Write comments only where necessary to explain why, not what
+- Remove unused code, variables, and imports promptly
+- Follow secure coding practices; never commit secrets or credentials

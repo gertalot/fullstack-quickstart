@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Development Process Guidelines
+
+- Work iteratively, executing only the steps instructed by the developer.
+- For each development task:
+  1. Rewrite the task prompt to include all necessary information for flawless execution by an LLM.
+  2. Present the rewritten prompt to the developer for feedback.
+  3. Incorporate feedback and update the document containing the prompt accordingly.
+- All code must be elegant, simple, and free of linter warnings, type errors, or any other errors during development, build, test, and deployment.
+- All functionality must be covered by tests, which must pass before a task is considered complete.
+- Install all required libraries and frameworks.
+- Use git actively:
+  - Before starting each development task: `git checkout -b MY_BRANCH_NAME`, with a short branch name that is representative of the task.
+  - After completing each development task: Commit all changes for the task to this branch.
+  - For successive tasks, branch from the previous task's branch.
+- You are encouraged to use all relevant tools (such as `tsc`, `eslint`, and others) to check the codebase for errors or warnings, and to iteratively fix any issues until all checks pass cleanly.
+- run tests in the "web" project with `yarn test --run` to disable watch mode
+- When a task is complete, request developer sign-off. Once approved, mark the task as done.
+- To mark tasks as done, use a markdown checkbox: `[ ]` for incomplete, `[x]` for complete. To mark headings as done, append `(Done)` to the end of the heading. Use either as appropriate.

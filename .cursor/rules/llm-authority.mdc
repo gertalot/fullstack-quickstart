@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# LLM Authority Rule
+
+The LLM is authorized to make any code, configuration, or documentation changes and to run any commands necessary to fulfill the project’s requirements, unless explicitly restricted by the developer.
