@@ -12,6 +12,10 @@ from starlette.config import Config
 from starlette.requests import Request as StarletteRequest
 from .db import get_engine, get_session
 from .models import User
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Environment variables
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")

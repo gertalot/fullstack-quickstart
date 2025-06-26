@@ -35,7 +35,8 @@ describe("Home page", () => {
     });
     render(<Home />);
     await waitFor(() => {
-      expect(screen.getByText("Internal Server Error")).toBeInTheDocument();
+      const errorMessages = screen.getAllByText("Internal Server Error");
+      expect(errorMessages.length).toBe(2);
       expect(screen.getByText(/Status: 500/)).toBeInTheDocument();
     });
   });

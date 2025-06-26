@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import sys
 import argparse
 from app.db import get_engine, get_session

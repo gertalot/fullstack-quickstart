@@ -6,24 +6,43 @@ tasks:
     cmds:
       - task --list
 
+  build:
+    desc: Build and package all projects for deployment
+    deps: [app:build, web:build]
+    cmds:
+      - echo "All projects built!"
+  
+  test:
+    desc: Run all tests
+    deps: [app:test, web:test]
+    cmds:
+      - echo "Ran all tests"
+
+
   # API tasks
-  api:test:
+  app:test:
     desc: Run backend tests with pytest
     dir: api
     cmds:
-      - poetry run pytest -s
+      - poetry run pytest
 
-  api:dev:
+  app:dev:
     desc: Start backend dev server (uvicorn, hot reload)
     dir: api
     cmds:
-      - poetry run uvicorn api:app --host 0.0.0.0 --reload
+      - poetry run uvicorn app:my_app --host 0.0.0.0 --reload
 
-  api:install:
+  app:install:
     desc: Install backend dependencies
     dir: api
     cmds:
       - poetry install
+
+  app:build:
+    desc: Build backend (customize as needed)
+    dir: api
+    cmds:
+      - echo "Build backend here"
 
   # Admin CLI
   admin:
@@ -52,6 +71,12 @@ tasks:
     cmds:
       - yarn install
 
+  web:build:
+    desc: Build frontend (customize as needed)
+    dir: web
+    cmds:
+      - yarn build
+
   # DB tasks
   db:dev:
     desc: Start database with Docker Compose
@@ -59,21 +84,3 @@ tasks:
     cmds:
       - docker compose up
 
-  # Build everything
-  build:
-    desc: Build and package all projects for deployment
-    deps: [api:build, web:build]
-    cmds:
-      - echo "All projects built!"
-
-  api:build:
-    desc: Build backend (customize as needed)
-    dir: api
-    cmds:
-      - echo "Build backend here"
-
-  web:build:
-    desc: Build frontend (customize as needed)
-    dir: web
-    cmds:
-      - yarn build 
