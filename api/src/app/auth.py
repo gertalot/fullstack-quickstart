@@ -134,18 +134,4 @@ def get_authenticated_user(request: Request):
         "last_login": user.last_login.isoformat() if user.last_login else None,
         "is_active": user.is_active,
         "is_admin": user.is_admin,
-    }
-
-@auth_router.get("/test-redirect")
-def test_redirect():
-    from fastapi.responses import RedirectResponse
-    return RedirectResponse(url="/api/v1/healthcheck", status_code=302)
-
-async def fake_oauth_redirect(request, redirect_uri):
-    from fastapi.responses import RedirectResponse
-    return RedirectResponse(url="/api/v1/healthcheck", status_code=302)
-
-@auth_router.get("/test-redirect-mock")
-async def test_redirect_mock(request: Request):
-    result = await fake_oauth_redirect(request, "/api/v1/healthcheck")
-    return result 
+    } 

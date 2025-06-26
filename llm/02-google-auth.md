@@ -93,12 +93,12 @@ Examples:
 
 ---
 
-### 2. Google OAuth backend
+### 2. Google OAuth backend (Done)
 
-Implement OAuth2 with Google on the backend API. Create a distinction between public routes and
+[x] Implement OAuth2 with Google on the backend API. Create a distinction between public routes and
 authenticated routes. The authenticated routes can only be accessed with a successful bearer token (a JWT).
 
-Create a route `/auth/login/google` that initiates the OAuth2 flow with Google. I have configured the following
+[x] Create a route `/auth/login/google` that initiates the OAuth2 flow with Google. I have configured the following
 variables in .env that you can use:
 
 - GOOGLE_CLIENT_ID
@@ -106,9 +106,32 @@ variables in .env that you can use:
 - SESSION_SECRET_KEY
 - JWT_SECRET
 
-Create a route `/auth/callback/google` to handle the Oauth2 callback from Google. Detect the original frontend
+[x] Create a route `/auth/callback/google` to handle the Oauth2 callback from Google. Detect the original frontend
 server the user was using (e.g. <http://localhost>, <https://example.com>, etc) and return a redirect response
 to the frontend path `/auth/callback#token={jwt_token}`. We will handle the JWT in the frontend at a later stage.
 
-Create an authenticated route `/auth` that, when authenticated, returns an object representing the user. We will
+[x] Create an authenticated route `/auth` that, when authenticated, returns an object representing the user. We will
 use this in the frontend to detect if a user is logged in.
+
+#### 2.1. Testing the OAuth Backend (Done)
+
+> **Prompt:**
+>
+> Write robust, modern test cases for the FastAPI OAuth2 backend using Authlib and pytest. Your tests should:
+>
+> - Use pytest fixtures and FastAPI's TestClient for all HTTP route tests.
+> - Patch/mimic Authlib's `authorize_redirect`, `authorize_access_token`, and `parse_id_token` methods using pytest's `monkeypatch` fixture, so that no real HTTP calls are made to Google.
+> - Cover the following flows:
+>   1. `/api/v1/auth/login/google` returns a redirect response (302/307) to the Google login page (mocked).
+>   2. `/api/v1/auth/callback/google` with mocked token and userinfo creates a user (if new), updates last_login (if existing), and redirects with a JWT in the URL fragment.
+>   3. `/api/v1/auth` returns 401 if no/invalid JWT, and returns user info if a valid JWT is provided.
+>   4. Error cases: OAuth error, missing userinfo, invalid JWT, user not found.
+> - Use fixtures to set up the test DB and client, and ensure all tests are isolated and repeatable.
+> - Assert on all relevant response status codes, headers, and payloads.
+> - Use best practices for dependency injection and mocking, and ensure all code is clean, readable, and up-to-date with 2024 best practices.
+> - Do not use any real network calls or external dependencies in tests.
+> - Ensure all new code is covered by automated tests, and all tests pass cleanly.
+
+---
+
+### Auth frontend

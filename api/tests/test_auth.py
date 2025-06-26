@@ -144,14 +144,4 @@ def test_auth_protected_route_with_valid_jwt(client):
 def test_auth_protected_route_with_invalid_jwt(client):
     resp = client.get("/api/v1/auth", headers={"Authorization": "Bearer invalidtoken"})
     assert resp.status_code == 401
-    assert "Invalid token" in resp.text
-
-def test_minimal_redirect(client):
-    resp = client.get("/api/v1/test-redirect", follow_redirects=False)
-    assert resp.status_code == 302
-    assert resp.headers["location"] == "/api/v1/healthcheck"
-
-def test_mocked_async_redirect(client):
-    resp = client.get("/api/v1/test-redirect-mock", follow_redirects=False)
-    assert resp.status_code == 302
-    assert resp.headers["location"] == "/api/v1/healthcheck" 
+    assert "Invalid token" in resp.text 
