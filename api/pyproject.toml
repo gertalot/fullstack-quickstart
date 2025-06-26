@@ -21,7 +21,7 @@ packages = [
     {include = "cli", from = "src"}
 ]
 
-[project.scripts]
+[tool.poetry.scripts]
 savour-admin = "cli.admin:main"
 
 [tool.poetry.group.dev.dependencies]

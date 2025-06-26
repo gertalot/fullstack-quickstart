@@ -86,3 +86,7 @@ Examples:
   # Delete user Gert Verhoog:
   python -m cli.admin user del me@gertalot.com
 ```
+
+### 1.3. user admin
+
+In the admin CLI tool, implement the "user" functionality as illustrated above in the help text.

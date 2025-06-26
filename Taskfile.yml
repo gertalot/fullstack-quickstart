@@ -1,0 +1,79 @@
+version: '3'
+
+tasks:
+  help:
+    desc: Show all available tasks
+    cmds:
+      - task --list
+
+  # API tasks
+  api:test:
+    desc: Run backend tests with pytest
+    dir: api
+    cmds:
+      - poetry run pytest
+
+  api:dev:
+    desc: Start backend dev server (uvicorn, hot reload)
+    dir: api
+    cmds:
+      - poetry run uvicorn api:app --host 0.0.0.0 --reload
+
+  api:install:
+    desc: Install backend dependencies
+    dir: api
+    cmds:
+      - poetry install
+
+  # Admin CLI
+  admin:
+    desc: Run savour-admin CLI in the api directory (forwards all arguments)
+    dir: api
+    cmds:
+      - poetry run savour-admin {{.CLI_ARGS}}
+    silent: false
+
+  # Web tasks
+  web:test:
+    desc: Run frontend tests with vitest
+    dir: web
+    cmds:
+      - yarn test
+
+  web:dev:
+    desc: Start frontend dev server (vite/next)
+    dir: web
+    cmds:
+      - yarn dev
+
+  web:install:
+    desc: Install frontend dependencies
+    dir: web
+    cmds:
+      - yarn install
+
+  # DB tasks
+  db:dev:
+    desc: Start database with Docker Compose
+    dir: db
+    cmds:
+      - docker compose up
+
+  # Build everything
+  build:
+    desc: Build and package all projects for deployment
+    deps: [api:build, web:build]
+    cmds:
+      - echo "All projects built!"
+
+  api:build:
+    desc: Build backend (customize as needed)
+    dir: api
+    cmds:
+      - echo "Build backend here"
+
+  web:build:
+    desc: Build frontend (customize as needed)
+    dir: web
+    cmds:
+      - yarn build 

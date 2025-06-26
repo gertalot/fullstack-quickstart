@@ -57,7 +57,65 @@ def handle_herbs(args):
     print("[herbs] Command not yet implemented.")
 
 def handle_user(args):
-    print("[user] Command not yet implemented.")
+    parser = argparse.ArgumentParser(prog="user", add_help=False)
+    subparsers = parser.add_subparsers(dest="action", required=True)
+
+    # add
+    add_parser = subparsers.add_parser("add", help="Add a user to the user database")
+    add_parser.add_argument("-u", dest="name", type=str, help="Set user's name (for add)")
+    add_parser.add_argument("email", type=str, help="User's email")
+
+    # del
+    del_parser = subparsers.add_parser("del", help="Delete a user from the user database")
+    del_parser.add_argument("email", type=str, help="User's email")
+
+    # list
+    list_parser = subparsers.add_parser("list", help="List all users")
+
+    subargs = parser.parse_args(args.subargs)
+
+    engine = get_engine()
+    session = get_session(engine)
+    dry_run = args.n
+    force = args.f
+
+    if subargs.action == 'add':
+        name = subargs.name or subargs.email
+        existing = session.query(User).filter_by(email=subargs.email).first()
+        if existing and not force:
+            print(f"User with email {subargs.email} already exists. Use -f to overwrite.")
+            sys.exit(1)
+        if dry_run:
+            print(f"[DRY RUN] Would add user: {subargs.email} (name: {name})")
+            return
+        if existing:
+            session.delete(existing)
+            session.commit()
+        user = User(email=subargs.email, name=name)
+        session.add(user)
+        session.commit()
+        print(f"User added: {user.email} (name: {user.name})")
+    elif subargs.action == 'del':
+        user = session.query(User).filter_by(email=subargs.email).first()
+        if not user:
+            print(f"User with email {subargs.email} not found.")
+            sys.exit(1)
+        if dry_run:
+            print(f"[DRY RUN] Would delete user: {subargs.email}")
+            return
+        session.delete(user)
+        session.commit()
+        print(f"User deleted: {subargs.email}")
+    elif subargs.action == 'list':
+        users = session.query(User).all()
+        if not users:
+            print("No users found.")
+            return
+        print(f"{'Email':<30} {'Name':<20} {'Last Login':<20}")
+        print("-" * 70)
+        for user in users:
+            last_login = user.last_login.isoformat() if user.last_login else "-"
+            print(f"{user.email:<30} {user.name:<20} {last_login:<20}")
 
 if __name__ == "__main__":
     main() 
