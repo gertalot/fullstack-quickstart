@@ -39,46 +39,32 @@ Command "user" options:
     parser.add_argument('command', nargs='?', help='Command to run (herbs, user, help)')
     parser.add_argument('subargs', nargs=argparse.REMAINDER)
     args = parser.parse_args()
-
     if args.command in (None, 'help'):
         parser.print_usage()
         sys.exit(0)
-
     if args.command == 'herbs':
-        handle_herbs(args)
-    elif args.command == 'user':
+        print("[herbs] Command not yet implemented.")
+        sys.exit(0)
+    if args.command == 'user':
         handle_user(args)
-    else:
-        print(f"Unknown command: {args.command}")
-        parser.print_usage()
-        sys.exit(1)
-
-def handle_herbs(args):
-    print("[herbs] Command not yet implemented.")
+        sys.exit(0)
+    parser.print_usage()
+    sys.exit(1)
 
 def handle_user(args):
     parser = argparse.ArgumentParser(prog="user", add_help=False)
     subparsers = parser.add_subparsers(dest="action", required=True)
-
-    # add
-    add_parser = subparsers.add_parser("add", help="Add a user to the user database")
-    add_parser.add_argument("-u", dest="name", type=str, help="Set user's name (for add)")
-    add_parser.add_argument("email", type=str, help="User's email")
-
-    # del
-    del_parser = subparsers.add_parser("del", help="Delete a user from the user database")
-    del_parser.add_argument("email", type=str, help="User's email")
-
-    # list
-    list_parser = subparsers.add_parser("list", help="List all users")
-
+    add_parser = subparsers.add_parser("add")
+    add_parser.add_argument("-u", dest="name", type=str)
+    add_parser.add_argument("email", type=str)
+    del_parser = subparsers.add_parser("del")
+    del_parser.add_argument("email", type=str)
+    subparsers.add_parser("list")
     subargs = parser.parse_args(args.subargs)
-
     engine = get_engine()
     session = get_session(engine)
     dry_run = args.n
     force = args.f
-
     if subargs.action == 'add':
         name = subargs.name or subargs.email
         existing = session.query(User).filter_by(email=subargs.email).first()

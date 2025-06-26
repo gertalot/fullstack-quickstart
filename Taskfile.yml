@@ -11,7 +11,7 @@ tasks:
     desc: Run backend tests with pytest
     dir: api
     cmds:
-      - poetry run pytest
+      - poetry run pytest -s
 
   api:dev:
     desc: Start backend dev server (uvicorn, hot reload)

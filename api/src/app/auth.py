@@ -2,11 +2,9 @@
 Authentication routes and logic for Google OAuth2 and JWT.
 """
 import os
-import uuid
 import datetime
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from fastapi.responses import RedirectResponse, JSONResponse
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import RedirectResponse
 from jose import jwt, JWTError
 from authlib.integrations.starlette_client import OAuth, OAuthError
 from starlette.config import Config
@@ -31,9 +29,7 @@ oauth.register(
     client_id=GOOGLE_CLIENT_ID,
     client_secret=GOOGLE_CLIENT_SECRET,
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={
-        'scope': 'openid email profile',
-    },
+    client_kwargs={'scope': 'openid email profile'},
 )
 
 auth_router = APIRouter()
@@ -77,7 +73,7 @@ async def login_via_google(request: StarletteRequest):
     if not hasattr(oauth, "google") or oauth.google is None:
         raise HTTPException(status_code=500, detail="Google OAuth client not configured.")
     redirect_uri = request.url_for("auth_callback_google")
-    return await oauth.google.authorize_redirect(request, redirect_uri)  # type: ignore[attr-defined]
+    return await oauth.google.authorize_redirect(request, redirect_uri)
 
 # Route: Google OAuth2 callback
 @auth_router.get("/auth/callback/google", name="auth_callback_google")
@@ -86,8 +82,8 @@ async def auth_callback_google(request: StarletteRequest):
     if not hasattr(oauth, "google") or oauth.google is None:
         raise HTTPException(status_code=500, detail="Google OAuth client not configured.")
     try:
-        token = await oauth.google.authorize_access_token(request)  # type: ignore[attr-defined]
-        userinfo = await oauth.google.parse_id_token(request, token)  # type: ignore[attr-defined]
+        token = await oauth.google.authorize_access_token(request)
+        userinfo = await oauth.google.parse_id_token(request, token)
     except OAuthError:
         raise HTTPException(status_code=400, detail="OAuth authentication failed")
     if not userinfo or "email" not in userinfo:
