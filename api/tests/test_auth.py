@@ -146,10 +146,6 @@ def test_auth_protected_route_with_invalid_jwt(client):
     assert resp.status_code == 401
     assert "Invalid token" in resp.text
 
-def test_print_all_routes(client):
-    for route in client.app.routes:
-        print(f"{route.path} -> {getattr(route, 'methods', None)}")
-
 def test_minimal_redirect(client):
     resp = client.get("/api/v1/test-redirect", follow_redirects=False)
     assert resp.status_code == 302
