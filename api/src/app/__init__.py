@@ -1,5 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
 import time
 import os
 from fastapi import FastAPI, APIRouter
@@ -7,8 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from contextlib import asynccontextmanager
 from .db import Base, get_engine
-from . import models
 from .auth import auth_router
+from dotenv import load_dotenv
+
+load_dotenv()
 
 start_time = time.time()
 

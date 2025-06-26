@@ -18,6 +18,11 @@ tasks:
     cmds:
       - echo "Ran all tests"
 
+  lint:
+    desc: Lint and type-check the codebase
+    deps: [app:lint, web:lint]
+    cmds:
+      - echo "Linted and type-checked the codebase"
 
   # API tasks
   app:test:
@@ -43,6 +48,13 @@ tasks:
     dir: api
     cmds:
       - echo "Build backend here"
+
+  app:lint:
+    desc: Lint and type-check the backend codebase
+    dir: api
+    cmds:
+      - poetry run ruff check .
+      - poetry run mypy .
 
   # Admin CLI
   admin:
@@ -76,6 +88,13 @@ tasks:
     dir: web
     cmds:
       - yarn build
+
+  web:lint:
+    desc: Lint and type-check the frontend codebase
+    dir: web
+    cmds:
+      - yarn lint
+      - yarn tsc --noEmit
 
   # DB tasks
   db:dev:

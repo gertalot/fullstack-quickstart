@@ -5,8 +5,9 @@ import os
 import datetime
 import uuid
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi.responses import RedirectResponse
 from jose import jwt, JWTError
+# pyright: reportMissingImports=false
 from authlib.integrations.starlette_client import OAuth, OAuthError
 from starlette.config import Config
 from starlette.requests import Request as StarletteRequest

@@ -6,8 +6,8 @@ from app import my_app
 from app.db import get_engine, Base, get_session
 from app.models import User
 from fastapi.responses import RedirectResponse
+# pyright: reportMissingImports=false
 from authlib.integrations.starlette_client import OAuthError
-import uuid
 import app.auth as auth_mod
 
 os.environ["GOOGLE_CLIENT_ID"] = "dummy-client-id"

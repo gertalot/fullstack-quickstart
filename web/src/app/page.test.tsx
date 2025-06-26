@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import Home from "./page";
 
 // Mock fetch globally
@@ -12,7 +12,7 @@ afterEach(() => {
 
 describe("Home page", () => {
   it("renders healthcheck message and uptime on success", async () => {
-    (fetch as any).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       status: 200,
       json: async () => ({
@@ -28,7 +28,7 @@ describe("Home page", () => {
   });
 
   it("renders error message on fetch failure", async () => {
-    (fetch as any).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: false,
       status: 500,
       json: async () => ({ message: "Internal Server Error" }),
