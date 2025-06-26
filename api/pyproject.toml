@@ -10,12 +10,19 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi (>=0.115.13,<0.116.0)",
     "uvicorn[standard] (>=0.34.3,<0.35.0)",
-    "python-dotenv (>=1.1.1,<2.0.0)"
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "sqlalchemy (>=2.0.0,<3.0.0)",
+    "pyyaml (>=6.0.0,<7.0.0)"
 ]
 
 [tool.poetry]
-packages = [{include = "api", from = "src"}]
+packages = [
+    {include = "api", from = "src"},
+    {include = "cli", from = "src"}
+]
 
+[project.scripts]
+savour-admin = "cli.admin:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"

@@ -30,3 +30,17 @@ uvicorn api:app --reload --factory
 ```sh
 pytest
 ```
+
+## Admin CLI Usage
+
+You can run the admin CLI in two ways:
+
+1. As an installed script (after 'poetry install' or 'pip install .'):
+
+    savour-admin [FLAGS] COMMAND [OPTIONS]
+
+2. Directly with Python (from the api/src directory):
+
+    python -m cli.admin [FLAGS] COMMAND [OPTIONS]
+
+The CLI supports managing users and uploading herb data. See the help text for details and examples.
