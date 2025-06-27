@@ -1,0 +1,35 @@
+name: Release Template Tarball
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create template tarball
+        run: |
+          tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' -czf template-latest.tar.gz .
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: template-latest.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

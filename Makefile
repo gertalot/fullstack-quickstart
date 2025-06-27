@@ -95,7 +95,9 @@ release:
 	git tag "v$(VERSION)"
 	git push origin "v$(VERSION)"
 	tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' --exclude="template-$(VERSION).tar.gz" -czf "template-$(VERSION).tar.gz" .
-	gh release create "v$(VERSION)" "template-$(VERSION).tar.gz" --title "v$(VERSION)" --notes "Release $(VERSION)"
+	cp template-$(VERSION).tar.gz template-latest.tar.gz
+	gh release create "v$(VERSION)" "template-$(VERSION).tar.gz" "template-latest.tar.gz" --title "v$(VERSION)" --notes "Release $(VERSION)"
 
 release-latest:
-	tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' -czf "template-latest.tar.gz" . 
+	tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' -czf "template-latest.tar.gz" .
+	gh release upload latest "template-latest.tar.gz" --clobber 
