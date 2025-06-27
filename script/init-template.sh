@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /bin/sh
 ##############################################################################
 # Project Template Initializer
 #
@@ -6,7 +6,8 @@
 # It prompts for project variables, replaces placeholders, and initializes git.
 #
 # Usage:
-#   curl -sSL https://example.com/init-template.sh | zsh
+#   curl -sSL https://example.com/init-template.sh | sh
+#   sh init-template.sh
 #
 # Copyright (c) 2025
 # Gert Verhoog [All rights reserved].
@@ -76,15 +77,16 @@ message_err() {
 }
 
 
+ask_reply=""
 ask() {
     prompt="$1"; shift
     default="$1"; shift
-    echo -n "${txtcya}❓ $prompt${txtnorm} [${default}]: "
-    read reply
+    print -n "${txtcya}❓ $prompt${txtnorm} [${default}]: "
+    read reply < /dev/tty
     if [ -z "$reply" ]; then
         reply="$default"
     fi
-    return "$reply"
+    ask_reply="$reply"
 }
 
 #############################################################################
@@ -115,6 +117,7 @@ done
 # download and unpack
 #############################################################################
 
+DIR="fullstack-quickstart"
 if [ "$INTERACTIVE" = true ]; then
     # Find the directory where this script is located (assume repo root)
     SCRIPT_DIR="$(cd "$(dirname -- "$0")" && pwd)"
@@ -124,7 +127,6 @@ if [ "$INTERACTIVE" = true ]; then
     cp -pr "$REPO_ROOT"/. "$DIR"/
 else
     if [ "$TEMPLATE_VERSION" = "latest" ]; then
-        DIR="fullstack-quickstart"
         URL="https://github.com/gertalot/fullstack-quickstart/releases/latest/download/template-latest.tar.gz"
     else
         DIR="fullstack-quickstart-$TEMPLATE_VERSION"
@@ -179,27 +181,27 @@ echo ""
 
 if [ -z "$PROJECT_NAME" ]; then
     ask "Enter your project name" "MyApp"
-    PROJECT_NAME="$global_reply"
+    PROJECT_NAME="$ask_reply"
 fi
 if [ -z "$AUTHOR_NAME" ]; then
     ask "Enter author name" "Jane Doe"
-    AUTHOR_NAME="$global_reply"
+    AUTHOR_NAME="$ask_reply"
 fi
 if [ -z "$AUTHOR_EMAIL" ]; then
     ask "Enter author email" "me@example.com"
-    AUTHOR_EMAIL="$global_reply"
+    AUTHOR_EMAIL="$ask_reply"
 fi
 if [ -z "$DB_NAME" ]; then
     ask "Enter database name" "myapp_db"
-    DB_NAME="$global_reply"
+    DB_NAME="$ask_reply"
 fi
 if [ -z "$CLI_NAME" ]; then
     ask "Enter CLI tool name" "myapp-admin"
-    CLI_NAME="$global_reply"
+    CLI_NAME="$ask_reply"
 fi
 if [ -z "$DOCKER_VOLUME" ]; then
     ask "Enter Docker volume name" "myapp-data"
-    DOCKER_VOLUME="$global_reply"
+    DOCKER_VOLUME="$ask_reply"
 fi
 
 
@@ -209,7 +211,7 @@ message_info "Database: $DB_NAME"
 message_info "CLI Tool: $CLI_NAME"
 message_info "Docker Volume: $DOCKER_VOLUME"
 echo -n "${txtcya}Proceed with these settings? [Y/n]: ${txtnorm}"
-read proceed
+read proceed < /dev/tty
 if [[ "$proceed" =~ ^[Nn] ]]; then
     message_err "Aborted by user."
     exit 1
