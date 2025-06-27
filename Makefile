@@ -91,7 +91,7 @@ release:
 	$(eval VERSION := $(shell grep '^version =' api/pyproject.toml | cut -d'"' -f2))
 	git tag "v$(VERSION)"
 	git push origin "v$(VERSION)"
-	tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' -czf "template-$(VERSION).tar.gz" .
+	tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.log' --exclude="template-$(VERSION).tar.gz" -czf "template-$(VERSION).tar.gz" .
 	gh release create "v$(VERSION)" "template-$(VERSION).tar.gz" --title "v$(VERSION)" --notes "Release $(VERSION)"
 
 release-latest:

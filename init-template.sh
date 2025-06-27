@@ -33,10 +33,10 @@ fi
 
 if [ "$DOWNLOAD_TEMPLATE" = "1" ]; then
     if [ "$TEMPLATE_VERSION" = "latest" ]; then
-        URL="https://github.com/yourorg/yourtemplate/releases/latest/download/template-latest.tar.gz"
+        URL="https://github.com/gertalot/fullstack-quickstart/releases/latest/download/template-latest.tar.gz"
         DIR="template-latest"
     else
-        URL="https://github.com/yourorg/yourtemplate/releases/download/$TEMPLATE_VERSION/template-$TEMPLATE_VERSION.tar.gz"
+        URL="https://github.com/gertalot/fullstack-quickstart/releases/download/$TEMPLATE_VERSION/template-$TEMPLATE_VERSION.tar.gz"
         DIR="template-$TEMPLATE_VERSION"
     fi
     echo "ℹ️  Downloading template from $URL ..."
