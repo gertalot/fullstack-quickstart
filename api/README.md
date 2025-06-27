@@ -1,4 +1,4 @@
-# Savour Herbs API
+# TEMPLATE_PROJECT_NAME API
 
 ## Prerequisites
 

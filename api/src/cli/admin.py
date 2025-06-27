@@ -8,7 +8,7 @@ load_dotenv()
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Savour Herbs Admin CLI",
+        description="TEMPLATE_PROJECT_NAME Admin CLI",
         usage="""
 Usage: python -m cli.admin FLAGS COMMAND OPTIONS
 
@@ -18,14 +18,14 @@ Flags:
 
 Command:
   help           Show this help and exit
-  herbs OPTIONS  upload herb information to the database
+  TEMPLATE_PROJECT_NAME_LOWER OPTIONS  upload TEMPLATE_PROJECT_NAME_LOWER information to the database
   user OPTIONS   add/delete users
 
-Command "herbs" usage: python -m cli.admin FLAGS herbs OPTIONS
+Command "TEMPLATE_PROJECT_NAME_LOWER" usage: python -m cli.admin FLAGS TEMPLATE_PROJECT_NAME_LOWER OPTIONS
 
-herbs Options:
+TEMPLATE_PROJECT_NAME_LOWER Options:
   -d DIR         Directory containing images (mandatory)
-  -i YAML_FILE   YAML file with herb entries (mandatory)
+  -i YAML_FILE   YAML file with TEMPLATE_PROJECT_NAME_LOWER entries (mandatory)
 
 Command "user" usage: python -m cli.admin FLAGS user add|del OPTIONS EMAIL
 

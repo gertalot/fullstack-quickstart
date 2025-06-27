@@ -21,7 +21,7 @@ def healthcheck():
     hours, remainder = divmod(remainder, 3600)
     minutes, seconds = divmod(remainder, 60)
     return {
-        "message": "Savour Herbs API is healthy!",
+        "message": "TEMPLATE_PROJECT_NAME API is healthy!",
         "uptime": {
             "days": days,
             "hours": hours,

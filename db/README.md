@@ -1,4 +1,4 @@
-# Savour Herbs Database
+# TEMPLATE_PROJECT_NAME Database
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ docker compose down
 
 ### Data Persistence
 
-- Data is stored in the named Docker volume `herbs-data`.
+- Data is stored in the named Docker volume TEMPLATE_DOCKER_VOLUME.
 
 ### Connection Details
 

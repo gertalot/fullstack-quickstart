@@ -13,8 +13,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - herbs-data:/var/lib/postgresql/data
+      - TEMPLATE_DOCKER_VOLUME:/var/lib/postgresql/data
 
 volumes:
-  herbs-data:
-    name: herbs-data
+  TEMPLATE_DOCKER_VOLUME:
+    name: TEMPLATE_DOCKER_VOLUME

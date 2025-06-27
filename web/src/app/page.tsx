@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-950">
       <div className="bg-gray-900 rounded-xl shadow-lg p-8 flex flex-col items-center w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-white">Savour Herbs</h1>
+        <h1 className="text-3xl font-bold mb-6 text-white">TEMPLATE_PROJECT_NAME</h1>
         {status === "loading" && (
           <div className="text-gray-400">Loading...</div>
         )}

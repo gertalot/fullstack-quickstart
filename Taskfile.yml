@@ -58,10 +58,10 @@ tasks:
 
   # Admin CLI
   admin:
-    desc: Run savour-admin CLI in the api directory (forwards all arguments)
+    desc: Run TEMPLATE_CLI_NAME CLI in the api directory (forwards all arguments)
     dir: api
     cmds:
-      - poetry run savour-admin {{.CLI_ARGS}}
+      - poetry run TEMPLATE_CLI_NAME {{.CLI_ARGS}}
     silent: false
 
   # Web tasks
@@ -102,4 +102,18 @@ tasks:
     dir: db
     cmds:
       - docker compose up
+
+  release:
+    desc: Create a versioned release tarball and upload to GitHub Releases
+    cmds:
+      - VERSION=$(grep '^version =' api/pyproject.toml | cut -d'"' -f2)
+      - git tag "v$VERSION"
+      - git push origin "v$VERSION"
+      - tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='*.pyc' --exclude='*.log' -czf "template-$VERSION.tar.gz" .
+      - gh release create "v$VERSION" "template-$VERSION.tar.gz" --title "v$VERSION" --notes "Release $VERSION"
+
+  release:latest:
+    desc: Create a tarball for the latest release (template-latest.tar.gz)
+    cmds:
+      - tar --exclude='.git' --exclude='.venv' --exclude='node_modules' --exclude='*.pyc' --exclude='*.log' -czf "template-latest.tar.gz" .
 

@@ -1,5 +1,5 @@
 """
-Database setup for Savour Herbs backend.
+Database setup for TEMPLATE_PROJECT_NAME backend.
 Defines engine, sessionmaker, and declarative base for SQLAlchemy ORM.
 """
 import os

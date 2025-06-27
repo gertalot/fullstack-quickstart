@@ -3,7 +3,7 @@ name = "api"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Gert Verhoog",email = "me@gertalot.com"}
+    {name = "TEMPLATE_AUTHOR_NAME",email = "TEMPLATE_AUTHOR_EMAIL@EXAMPLE.COM"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"

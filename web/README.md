@@ -1,4 +1,4 @@
-# Savour Herbs Web Frontend
+# TEMPLATE_PROJECT_NAME Web Frontend
 
 ## Prerequisites
 
