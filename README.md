@@ -61,7 +61,7 @@ variables in the codebase and set up your project for development.
 **Interactive mode (recommended):**
 
 ```sh
-curl -sSL https://example.com/init-template.sh | zsh
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init-template.sh | zsh
 ```
 
 You will be prompted for all required project details.
@@ -69,7 +69,7 @@ You will be prompted for all required project details.
 **Non-interactive mode:**
 
 ```sh
-curl -sSL https://example.com/init-template.sh | zsh -- \
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init-template.sh | zsh -- \
   -n "MyApp" \
   -a "Jane Doe" \
   -e "jane.doe@example.com" \
