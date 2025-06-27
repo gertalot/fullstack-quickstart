@@ -15,7 +15,7 @@ help:
 	@echo "  app-install     Install backend dependencies"
 	@echo "  app-build       Build backend (customize as needed)"
 	@echo "  app-lint        Lint and type-check the backend codebase"
-	@echo "  admin           Run TEMPLATE_CLI_NAME CLI in the api directory (forwards all arguments)"
+	@echo "  admin           Run admin CLI in the api directory (forwards all arguments)"
 	@echo "  web-test        Run frontend tests with vitest"
 	@echo "  web-dev         Start frontend dev server (vite/next)"
 	@echo "  web-install     Install frontend dependencies"
@@ -63,7 +63,7 @@ app-clean:
 	@echo "Cleaned backend (api) build artifacts and caches."
 
 admin:
-	cd api && poetry run TEMPLATE_CLI_NAME $(ARGS)
+	cd api && poetry run admin $(ARGS)
 
 # Web (frontend) targets
 web-test:

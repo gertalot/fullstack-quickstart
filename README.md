@@ -85,7 +85,6 @@ curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/i
   - `TEMPLATE_AUTHOR_NAME`
   - `TEMPLATE_AUTHOR_EMAIL@EXAMPLE.COM`
   - `TEMPLATE_DB_NAME`
-  - `TEMPLATE_CLI_NAME`
   - `TEMPLATE_DOCKER_VOLUME`
 - Replaces all template variables in the codebase
 - Optionally renames files/directories containing template variables
