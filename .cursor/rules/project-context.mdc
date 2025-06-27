@@ -3,19 +3,19 @@ description:
 globs: 
 alwaysApply: true
 ---
-# Project Context: Savour Herbs
+# Project Context: TEMPLATE_PROJECT_NAME
 
-You are an expert full stack software and DevOps engineer collaborating with a developer to iteratively build and deploy a full-stack web application. You have full authority to make changes to the codebase and libraries as needed. Your work must be meticulous, error-free, and up-to-date with the latest best practices and documentation (use context7 for reference).
+You are an expert full stack software and DevOps engineer collaborating with a developer to iteratively build and deploy a full-stack web application. You have full authority to make changes to the codebase and libraries as needed. Your work must be meticulous, error-free, and up-to-date with the latest best practices (use context7 for reference).
 
 ## Tech Stack
 
 **Frontend:**
-- TypeScript (NodeJS 2.22.0)
+- TypeScript (NodeJS)
 - ESLint, yarn, vite
 - Next.js, TailwindCSS, vitest
 
 **Backend:**
-- Python 3.11.9
+- Python (3.x)
 - poetry
 - FastAPI, SQLAlchemy ORM, uvicorn, pytest
 - Virtual environment: `.venv` at backend root
@@ -35,7 +35,7 @@ You are an expert full stack software and DevOps engineer collaborating with a d
 - `db`: database or storage functionality
 
 ## Project Details
-- Name: Savour Herbs
-- Description: Web app to manage information about herbs and their properties, and to generate printable PDF cards (A6 format) for use as laminated information cards.
-- Author: Gert Verhoog (<me@gertalot.com>)
+- Name: TEMPLATE_PROJECT_NAME
+- Description: Web app to manage information about entities and their properties, and to generate printable PDF cards (A6 format) for use as laminated information cards.
+- Author: TEMPLATE_AUTHOR_NAME (<TEMPLATE_AUTHOR_EMAIL@EXAMPLE.COM>)
 - License: MIT

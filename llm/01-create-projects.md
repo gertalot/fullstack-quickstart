@@ -17,7 +17,8 @@ Focus on local development only.
 ### 1.2. Database (Done)
 
 - [x] Create a `db` subdirectory.
-- [x] Add a Docker Compose file to start a Postgres database with data persisted on a named volume `herbs-data`.
+- [x] Add a Docker Compose file to start a Postgres database with data persisted on a named volume
+  `TEMPLATE_DOCKER_VOLUME`.
 - [x] Generate a strong username and password for the database.
 - [x] Store the full Postgres connection string in a `.env` file as `DATABASE_URL` for the API backend project.
 - [x] Create a `README.md` in `db` describing prerequisites, installation, and how to run the database locally.

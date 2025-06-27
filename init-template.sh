@@ -8,7 +8,7 @@
 # Usage:
 #   curl -sSL https://example.com/init-template.sh | zsh
 #
-# Copyright (c) 2024
+# Copyright (c) 2025
 # Gert Verhoog [All rights reserved].
 ##############################################################################
 
@@ -163,7 +163,7 @@ fi
 
 # 3. Recursively replace placeholders in all files (excluding .git, node_modules, .venv, etc.)
 message "Replacing placeholders in files..."
-find . \( -path './.git' -o -path './node_modules' -o -path './.venv' -o -name '*.pyc' -o -name '*.log' \) -prune -false -o -type f | while read file; do
+find . \( -path './.git' -o -path './node_modules' -o -path './.venv' -o -name '*.pyc' -o -name '*.log' \) -prune -false -o -type f \( -name '*' -o -name '.env' -o -name '.env.example' \) | while read file; do
     sed -i '' \
         -e "s/TEMPLATE_PROJECT_NAME/$PROJECT_NAME/g" \
         -e "s/TEMPLATE_AUTHOR_NAME/$AUTHOR_NAME/g" \

@@ -33,11 +33,11 @@ packages = [
 ]
 ```
 
-[x] Add a `[project.scripts]` entry so the CLI can be run as `savour-admin` (calls `main()` in `cli/admin.py`):
+[x] Add a `[project.scripts]` entry so the CLI can be run as `admin` (calls `main()` in `cli/admin.py`):
 
 ```toml
 [project.scripts]
-savour-admin = "cli.admin:main"
+admin = "cli.admin:main"
 ```
 
 [x] The CLI must also be runnable as `python -m cli.admin` (from the correct working directory).
@@ -57,14 +57,7 @@ Flags:
 
 Command:
   help           Show this help and exit
-  herbs OPTIONS  upload herb information to the database
   user OPTIONS   add/delete users
-
-Command "herbs" usage: python -m cli.admin FLAGS herbs OPTIONS
-
-herbs Options:
-  -d DIR         Directory containing images (mandatory)
-  -i YAML_FILE   YAML file with herb entries (mandatory)
 
 Command "user" usage: python -m cli.admin FLAGS user add|del OPTIONS EMAIL
 
@@ -76,9 +69,6 @@ Command "user" options:
   EMAIL          the user's email - this is how the user authenticates.
 
 Examples:
-
-  # Load all herbs and images from cards.yaml into the herbs table:
-  python -m cli.admin herbs -d ./images -i ./cards.yaml
 
   # Add a user Gert Verhoog with email me@gertalot.com:
   python -m cli.admin user add -u "Gert Verhoog" me@gertalot.com
