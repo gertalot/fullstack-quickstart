@@ -33,14 +33,14 @@ if [ "$DOWNLOAD_TEMPLATE" = "1" ]; then
         mkdir -p "$DIR"
         cp -pr "$REPO_ROOT"/. "$DIR"/
         cd "$DIR"
-        exec zsh -i ./init-template.sh "$@" < /dev/tty
+        exec zsh -i ./init.sh "$@" < /dev/tty
         exit
     else
         echo "ℹ️  Downloading template from $URL ..."
         mkdir -p "$DIR"
         curl -L "$URL" | tar xz -C "$DIR" --strip-components=1
         cd "$DIR"
-        exec zsh -i ./init-template.sh "$@" < /dev/tty
+        exec zsh -i ./init.sh "$@" < /dev/tty
         exit
     fi
 fi

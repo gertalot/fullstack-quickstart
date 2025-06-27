@@ -1,6 +1,15 @@
-# Project Template Quick Start
+# Full Stack Quickstart
 
-This repository is a full-stack web application template (Next.js + FastAPI + PostgreSQL) ready for customization.
+This repository is a full-stack web application with FastAPI, NextJS, and Postgres, ready for customisation.
+
+## TL;DR
+
+```sh
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh
+# (interactively answer some questions about your project)
+cd fullstack-quickstart
+make install test
+```
 
 ## Features
 
@@ -61,7 +70,7 @@ variables in the codebase and set up your project for development.
 **Interactive mode (recommended):**
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init-template.sh | zsh
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh
 ```
 
 You will be prompted for all required project details.
@@ -69,7 +78,7 @@ You will be prompted for all required project details.
 **Non-interactive mode:**
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init-template.sh | zsh -- \
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh -- \
   -n "MyApp" \
   -a "Jane Doe" \
   -e "jane.doe@example.com" \
