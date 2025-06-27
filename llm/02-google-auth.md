@@ -70,11 +70,11 @@ Command "user" options:
 
 Examples:
 
-  # Add a user Gert Verhoog with email me@gertalot.com:
-  python -m cli.admin user add -u "Gert Verhoog" me@gertalot.com
+  # Add a user John Doe with email jd@example.com:
+  python -m cli.admin user add -u "John Doe" jd@example.com
 
-  # Delete user Gert Verhoog:
-  python -m cli.admin user del me@gertalot.com
+  # Delete user John Doe:
+  python -m cli.admin user del jd@example.com
 ```
 
 ### 1.3. user admin (Done)

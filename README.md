@@ -2,7 +2,50 @@
 
 This repository is a full-stack web application template (Next.js + FastAPI + PostgreSQL) ready for customization.
 
-## 🚀 Getting Started
+## Features
+
+These are basic features you can build on or replace with something else:
+
+- **Backend**
+  - Python, FastAPI, poetry
+  - supports Google OAuth authentication flow.
+  - `/api/v1/auth` route returns information about the authenticated user
+  - `/healthcheck` returns a health check status + uptime
+  - SQLAlchemy for persistence, with `User` object for authorised users
+  - command line `admin` tool to manage users outside of the api
+  - tests with pytest
+- **Storage**
+  - Postgres database running in a docker container
+- **Frontend**
+  - Typescript, NextJS, Tailwind, Vitest
+  - main page that calls the healthcheck API route
+  - tests with vitest
+
+## AI-Driven Coding Template
+
+This repository is designed for AI-driven development workflows. It includes:
+
+- **Custom rules in `.cursor/`**: These provide project context, coding style guidelines, and other metadata to guide AI coding assistants (like Cursor, Copilot, or GPT-based tools).
+- **Task-driven development**: To add new features or make changes, simply add a markdown file describing your development task to the `llm/` directory. The AI model will read and execute these tasks iteratively.
+- **Full-stack template**: The repo is structured as a monorepo with backend (`api`), frontend (`web`), and database (`db`) projects, all ready for AI-assisted or human development.
+
+## Project Structure
+
+This monorepo contains three subprojects:
+
+- **api/** – The backend API
+  - **Tech stack:** Python 3.x, FastAPI, SQLAlchemy, Poetry, Uvicorn, Pytest
+  - **Purpose:** Provides a RESTful API for managing entities and their properties, authentication, and business logic. All backend logic and database access live here.
+
+- **db/** – The database and infrastructure
+  - **Tech stack:** PostgreSQL (via Docker Compose)
+  - **Purpose:** Contains database configuration, Docker Compose setup, and related infrastructure scripts. Manages persistent data storage for the application.
+
+- **web/** – The frontend web application
+  - **Tech stack:** TypeScript, Next.js, React, TailwindCSS, Vite, ESLint, Vitest
+  - **Purpose:** User-facing web interface for interacting with the application, displaying and managing entities, and generating printable PDF cards.
+
+## Getting Started
 
 You can initialize your new project from this template using the provided script. This will replace all template variables in the codebase and set up your project for development.
 

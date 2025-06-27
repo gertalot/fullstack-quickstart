@@ -12,6 +12,42 @@
 # Gert Verhoog [All rights reserved].
 ##############################################################################
 
+# --- BEGIN: Download/Bootstrap Logic ---
+TEMPLATE_MARKER="TEMPLATE_PROJECT_NAME"
+DOWNLOAD_TEMPLATE=0
+TEMPLATE_VERSION="latest"
+
+# Parse -V/--version early
+for arg in "$@"; do
+    if [[ "$arg" == "-V" || "$arg" == "--version" ]]; then
+        shift
+        TEMPLATE_VERSION="$1"
+        shift
+        break
+    fi
+done
+
+if ! grep -q "$TEMPLATE_MARKER" README.md 2>/dev/null; then
+    DOWNLOAD_TEMPLATE=1
+fi
+
+if [ "$DOWNLOAD_TEMPLATE" = "1" ]; then
+    if [ "$TEMPLATE_VERSION" = "latest" ]; then
+        URL="https://github.com/yourorg/yourtemplate/releases/latest/download/template-latest.tar.gz"
+        DIR="template-latest"
+    else
+        URL="https://github.com/yourorg/yourtemplate/releases/download/$TEMPLATE_VERSION/template-$TEMPLATE_VERSION.tar.gz"
+        DIR="template-$TEMPLATE_VERSION"
+    fi
+    echo "ℹ️  Downloading template from $URL ..."
+    mkdir -p "$DIR"
+    curl -L "$URL" | tar xz -C "$DIR" --strip-components=1
+    cd "$DIR"
+    exec ./init-template.sh "$@"
+    exit
+fi
+# --- END: Download/Bootstrap Logic ---
+
 # --- BEGIN: Interactive Functions (from example-setup.sh) ---
 txtbyel="$(tput bold)$(tput setaf 3)"
 txtbred="$(tput bold)$(tput setaf 1)"
@@ -193,52 +229,10 @@ if [ -d .git ]; then
     message_ok ".git directory removed."
 fi
 
-SCRIPT_NAME="$(basename "$0")"
-if [ -f "$SCRIPT_NAME" ]; then
-    message "Removing setup script ($SCRIPT_NAME)..."
-    rm -f "$SCRIPT_NAME"
-fi
-
 git init
 git add .
 git commit -m "Initial commit from template initializer"
 message_ok "Project initialized!"
 message_info "You can now start developing your project."
 
-# --- END: Main Script Logic ---
-
-# --- BEGIN: Download/Bootstrap Logic ---
-TEMPLATE_MARKER="TEMPLATE_PROJECT_NAME"
-DOWNLOAD_TEMPLATE=0
-TEMPLATE_VERSION="latest"
-
-# Parse -V/--version early
-for arg in "$@"; do
-    if [[ "$arg" == "-V" || "$arg" == "--version" ]]; then
-        shift
-        TEMPLATE_VERSION="$1"
-        shift
-        break
-    fi
-done
-
-if ! grep -q "$TEMPLATE_MARKER" README.md 2>/dev/null; then
-    DOWNLOAD_TEMPLATE=1
-fi
-
-if [ "$DOWNLOAD_TEMPLATE" = "1" ]; then
-    if [ "$TEMPLATE_VERSION" = "latest" ]; then
-        URL="https://github.com/yourorg/yourtemplate/releases/latest/download/template-latest.tar.gz"
-        DIR="template-latest"
-    else
-        URL="https://github.com/yourorg/yourtemplate/releases/download/$TEMPLATE_VERSION/template-$TEMPLATE_VERSION.tar.gz"
-        DIR="template-$TEMPLATE_VERSION"
-    fi
-    message_info "Downloading template from $URL ..."
-    mkdir -p "$DIR"
-    curl -L "$URL" | tar xz -C "$DIR" --strip-components=1
-    cd "$DIR"
-    exec ./init-template.sh "$@"
-    exit
-fi
-# --- END: Download/Bootstrap Logic --- 
+# --- END: Main Script Logic --- 
