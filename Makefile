@@ -26,6 +26,9 @@ help:
 	@echo "  release-latest  Create a tarball for the latest release (template-latest.tar.gz)"
 
 # Aggregate targets
+install: app-install web-install
+	@echo "Installed all dependencies"
+
 build: app-build web-build
 	@echo "All projects built!"
 
@@ -37,15 +40,6 @@ lint: app-lint web-lint
 
 clean: app-clean web-clean
 	@echo "Cleaned all subprojects."
-
-app-clean:
-	rm -rf api/__pycache__ api/.mypy_cache api/.ruff_cache api/.pytest_cache api/dist api/build api/.venv
-	find api -name '*.pyc' -delete
-	@echo "Cleaned backend (api) build artifacts and caches."
-
-web-clean:
-	rm -rf web/.next web/dist web/build web/coverage web/node_modules
-	@echo "Cleaned frontend (web) build artifacts and caches."
 
 # API (backend) targets
 app-test:
@@ -62,6 +56,11 @@ app-build:
 
 app-lint:
 	cd api && poetry run ruff check . && poetry run mypy .
+
+app-clean:
+	rm -rf api/__pycache__ api/.mypy_cache api/.ruff_cache api/.pytest_cache api/dist api/build api/.venv
+	find api -name '*.pyc' -delete
+	@echo "Cleaned backend (api) build artifacts and caches."
 
 admin:
 	cd api && poetry run TEMPLATE_CLI_NAME $(ARGS)
@@ -81,6 +80,10 @@ web-build:
 
 web-lint:
 	cd web && yarn lint && yarn tsc --noEmit
+
+web-clean:
+	rm -rf web/.next web/dist web/build web/coverage web/node_modules
+	@echo "Cleaned frontend (web) build artifacts and caches."
 
 # DB targets
 db-dev:
