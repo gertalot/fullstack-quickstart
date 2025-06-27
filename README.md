@@ -5,8 +5,12 @@ This repository is a full-stack web application with FastAPI, NextJS, and Postgr
 ## TL;DR
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh
-# (interactively answer some questions about your project)
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/script/init.sh | sh
+```
+
+Then answer some questions about your project, and voila! To make sure it's all working:
+
+```sh
 cd fullstack-quickstart
 make install test
 ```
@@ -70,7 +74,7 @@ variables in the codebase and set up your project for development.
 **Interactive mode (recommended):**
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/script/init.sh | sh
 ```
 
 You will be prompted for all required project details.
@@ -78,7 +82,7 @@ You will be prompted for all required project details.
 **Non-interactive mode:**
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/init.sh | sh -- \
+curl -sSL https://raw.githubusercontent.com/gertalot/fullstack-quickstart/main/script/init.sh | sh -- \
   -n "MyApp" \
   -a "Jane Doe" \
   -e "jane.doe@example.com" \
